@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>小米官网MIUI系列</title>
+    <link rel="stylesheet" type="text/css" href="css/main.css" charset="utf8">
+</head>
+<body>
+<div class="wrap">
+    <div class="header">
+        <div class="header-middle">
+            <div class="header-title">MIUI</div>
+            <ul class="header-leader">
+                <li><a href="#">首页</a></li>
+                <li><a href="#">MIUI9</a></li>
+                <li><a href="#">下载</a></li>
+                <li><a href="#">解锁</a></li>
+                <li><a href="#">论坛</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="middle">
+        <div class="middle-picture">
+            <!--轮播图-->
+            <div class="flexside" style="width: 100%;height: 600px;position: relative;">
+                <ul style="width:100%;overflow:hidden;height: 100%;">
+                    <li><img src="images/swiper_one.png" alt=""></li>
+                    <li><img src="images/swiper_one.png" alt=""></li>
+                    <li><img src="images/swiper_one.png" alt=""></li>
+                </ul>
+                <div class="dot">
+                    <a href="#" class="current dianji"></a>
+                    <a href="#" class="dianji"></a>
+                    <a href="#" class="dianji"></a>
+                </div>
+                <span style="position: absolute;left: 45%;top:10%">@李梓淇 2015020102023</span>
+            </div>
+            <!--<span style="color: #FFFFFF;">@李梓淇</span>-->
+            <!--<img src="images/1.jpg" style="width: 100%;height: 100%"/>-->
+        </div>
+    </div>
+    <div class="middle_bottom">
+
+        <div class="middle-footer">
+            <div style="float:left">
+                <img src="images/2.jpg" style="width:50px;height:50px;"/>
+            </div>
+
+            <div style="float:left;">
+                <p class="middle-footer-h1"> MIUI 9稳定版升级</p>
+                <p class="middle-footer-h2">已支持18款机型</p>
+            </div>
+        </div>
+
+        <div class="middle-footer">
+            <div style="float:left">
+                <img src="images/3.jpg" style="width:50px;height:50px;"/>
+            </div>
+            <div style="float:left;">
+                <p class="middle-footer-h1">MIUI355周更新公告</p>
+                <p class="middle-footer-h2">支付/绑卡时自动填充验证码</p>
+            </div>
+        </div>
+
+        <div class="middle-footer">
+            <div style="float:left">
+                <img src="images/4.jpg" style="width:50px;height:50px;"/>
+            </div>
+            <div style="float:left;">
+                <p class="middle-footer-h1">MIUI论坛APP邀您体验</p>
+                <p class="middle-footer-h2">全新改版 更好玩、更好用</p>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="footer">
+        <p>Copyright © 2017 MIUI京ICP备10046444号|京公网安备11010802020134号|京ICP证110507号</p>
+    </div>
+</div>
+<!--引入jquery,JS的其中一个库，先从比较简单的JQUERY开始吧-->
+<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+//        给body上的.dot绑定一个点击事件
+        $('body').on('click','.dot a.dianji',function(){
+//            定义一个当前是第几个的变量
+            var index=$(this).index();
+//            滑倒第几个（index）的时候渐入，其他的隐藏
+            $('.flexside ul li').eq(index).fadeIn().siblings().hide();
+//            因为滑倒第几个或者点击第几个的时候那个小圆点会变色，这时候是滑动到这一个的时候添加一个current的class，在class上定义样式
+            $(this).addClass('current').siblings().removeClass('current');
+
+        });
+
+        var timer=null;
+        function loop(){
+//            设置一个定时器，2秒跳到下一页
+            timer=setInterval(function(){
+                //当跳转到即current+1等于dianji的长度时重新轮播,否则向下轮播
+                if($('.dianji').index($('.dianji.current'))+1==$('.dianji').length)
+                {
+                    $('.dianji').eq(0).click();
+                }else
+                {
+                    $('.dot .current').next().click()
+                }
+            },2000);
+
+        }
+        // 鼠标覆盖停止移动，移开恢复定时器
+        $('.flexside').mouseover(function(){clearInterval(timer)}).mouseout(function(){
+            loop()
+        });
+
+    })
+</script>
+</body>
+</html>
+
+
+<!--修改的地方-->
+<!--wrap给个最小的宽度-->
+<!--不知道上面很多的margin干嘛用的，理解一下margin,padding以及border-sizing的属性-->
+<!--浮动清除浮动是用在什么地方去理解一下-->
+<!--多写几行就知道了-->
+
